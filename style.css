@@ -1,0 +1,143 @@
+/*Resetando as configurações*/
+
+*{
+    /*Retira Margem*/
+    margin: 0px;
+    /*Retira o Padding*/
+    padding: 0px;
+    /*Retira o estilo da lista*/
+    list-style: none;
+    /*Define um tamanho de fonte inicial (até ser alterada individualmente*/
+    font-size: 1.2rem;
+    /*Defini um tipo de fonte inicial*/
+    font-family: Arial;
+}
+
+/*Retirar a decoração (linhas) das letras da lista*/
+a{
+    text-decoration: none;
+    /*altera a cor dos elementos dentro de (a)*/
+    color: white;
+}
+
+h1{
+    text-align: center;
+    margin: 50px 0px 10px;
+}
+
+/*1 alterar a caracteristica estrutural (posicionamento dos elementos) do header*/
+/*Com Display Flex*/
+.header{
+    /*Comando para inserir um preenchimento de fundo */
+    background-color: #1d1e20;
+    /*Define o display flex "inicialemnte com estrutura em linha" row.
+    oque deixa os componentes do header em linha, um ao lado do outro*/
+    display: flex;
+    /*comando Flex-wrap: wrap ira quebrar o conteudo do header quando a tela for menor */
+    flex-wrap: wrap;
+    /*Definindo a disposição (justify-content) e o espaçamento entre os itens */
+    justify-content: space-between;
+    /*Definir um espaçamento em todos os lados, entre o conteudo e a borda com o (padding)*/
+    padding: 20px;
+    /*Alinhamos verticalmente ao centro todos os conteudos que estão no Header com (align-items: center)*/
+    align-items: center;
+}
+
+/*## Estilizando o BOX do conjunto Menu*/
+.menu {
+    /*Incluindo as caracteristicas estruturasis do Flex box, (estrutura padrao inicial em linha)*/
+    display: flex;
+}
+
+/*Estilizando o Box de cada item no menu (cada elemento)*/
+.menu li {
+    /*criando uma margem entre os itens*/
+    margin-left: 10px;
+}
+
+/*Estilizando o bloco do item 'a' (Cada "botao" do menu*/
+.menu li a {
+    /*Definindo o elemento 'a' como um unico bloco*/
+    display: block;
+    /*Definindo um espaçamento entre o conteudo e a margem com o passing*/
+    padding: 10px;
+}
+
+/*############################     A partir daqui temos o corpo da pagina     #############################################*/
+
+/*  Colocando as imagens responsivas*/
+img {
+    /*definindo o tamanho da imagem, pq a img que peguei é pequena*/
+    width: 1000px;
+    /*Definir que seu tamanho maximo será o do proprio container*/
+    max-width: 100%;
+    /*Definir a imagem como sendo um unico bloco*/
+    display: block;
+}
+
+
+/*  CSS Grid layout 1*/
+
+/*Primeiro colocamos o sistema de grade (grid) para a cessão*/
+/*iniciamos colocando display: grid na cessão das fotos*/
+.grid1 {
+    display: grid;
+    /*Agora temos que informar a quantiodade de colunas do grid que queremos*/
+    /*Vamos dividir a grade em 3 partes iguais, podemos escrever
+    grid-template-columns: 1fr 1fr 1fr, ou da forma abaixo(o 1fr é a unidade fracionaria*/
+    grid-template-columns: repeat(3, 1fr);
+    /* Definindo a largura maxima do container*/
+    max-width: 800px;
+    /*Colocar tudo centralizado na tela*/
+    margin: 0 auto;
+    /* Definir ESPAÇAMENTO entre os itens*/
+    gap: 20px;
+}
+
+/* alteando o tamanho das 3 primeiras imagens
+para isso selecionamos apenas os 3 primeiros filhos da grid selecionada
+com o comando (nth-child(x)), no lugar de x colocamos os elementos que queremos acessar */
+/*Como vamos alterar o tamanho apenas aós o 3 elemento, podemos colocar (n + 4)*/
+.grid1 > div:nth-child(n + 4){
+    /*seleciona a função de grade com display: grid*/
+    display: grid;
+    /*Fazemos agora a divisão da quantidade de colunas que queremos*/
+    grid-template-columns: 1fr 1fr;
+    /* Definir ESPAÇAMENTO entre os itens*/
+    gap: 10px;
+    /* Alinhando os itens na horizontal(imagens e texto) (partir do 4°)*/
+    align-items: center;
+}
+
+/* Agora fazemos o posicionamento do anuncio, no lado esquerdo e ao lado das outras colunas*/
+.grid1 > div.anuncio{
+    /* Com o comando abaixo, informamos em qual coluna o elemento deve ficar posicionado*/
+    grid-column: 1;
+    /* Agora informamos a linha em que ele deve ficar, ou nentre quais linhas*/
+    /*nesse caso entre a linha 2 e 5*/
+    grid-row: 2/5;
+    /*Estilizando o anuncio, podemos colocalo em um unico bloco
+    assim a legenda fica na parte inferior*/
+    display: block;
+}
+
+
+/*########## configurando a parte RESPONSIVA ######*/
+/*  PARA UTILIZAÇÂO EM APARELHOS MENORES*/
+
+/*Agora definimos oque tem que ser feito quando a tela estiver
+ menor que determinado tamanho "aqui 600px"*/
+@media (max-width: 600px){
+    .grid1{
+        grid-template-columns: 1fr 1fr;
+    }
+    .grid1 > div:nth-child(n + 4){
+        display: block;
+    }
+    .grid1 > div.anuncio{
+        grid-column: auto;
+        grid-row: auto;
+        /*Alterando a ordem do anuncio para que fique no topo*/
+        order: -1;
+    }
+}
